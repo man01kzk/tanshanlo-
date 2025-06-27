@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Таблица с подсветкой</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+    }
+
+    td, th {
+      padding: 12px 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      transition: background-color 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    tr.first-col {
+      background-color: #e0e0e0;
+      font-weight: bold;
+    }
+
+    td.first-row {
+      background-color: #e0e0e0;
+    }
+
+    /* Подсветка основной ячейки */
+    .hover-main {
+      background-color: ##000000 !important;
+      color: white;
+    }
+
+    /* Все ячейки над выбранной и слева от неё */
+    .hover-area {
+      background-color: #cccccc !important;
+      color: black;
+    }
+
+    /* Пересечение (левый верхний угол) */
+    .hover-corner {
+      background-color: #666666 !important;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<table id="hoverTable">
+  <thead>
+    <tr class="first-col">
+      <th>Размер</th>
+      <th>Вес изделия</th>
+      <th>Высота подошвы</th>
+      <th>Длина изделия</th>
+      <th>Ширина изделия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="first-row">35.5</td><td></td><td>2</td><td>22</td><td>8.5</td></tr>
+    <tr><td class="first-row">36</td><td></td><td>2</td><td>22.5</td><td>8.5</td></tr>
+    <tr><td class="first-row">37</td><td></td><td>2</td><td>23</td><td>8.5</td></tr>
+    <tr><td class="first-row">37.5</td><td></td><td>2</td><td>23.5</td><td>8.5</td></tr>
+    <tr><td class="first-row">38</td><td>310</td><td>2</td><td>24</td><td>8.5</td></tr>
+    <tr><td class="first-row">38.5</td><td></td><td>2</td><td>24.5</td><td>9</td></tr>
+    <tr><td class="first-row">39</td><td></td><td>2</td><td>25</td><td>9</td></tr>
+    <tr><td class="first-row">40</td><td></td><td>2</td><td>25.5</td><td>9</td></tr>
+    <tr><td class="first-row">40.5</td><td></td><td>2</td><td>26</td><td>9.5</td></tr>
+    <tr><td class="first-row">41</td><td></td><td>2</td><td>26.5</td><td>9</td></tr>
+    <tr><td class="first-row">42</td><td>330</td><td>2</td><td>27</td><td>9.5</td></tr>
+    <tr><td class="first-row">42.5</td><td></td><td>2</td><td>27.5</td><td>9.5</td></tr>
+    <tr><td class="first-row">43</td><td></td><td>2</td><td>28</td><td>9.5</td></tr>
+    <tr><td class="first-row">44</td><td></td><td>2</td><td>28.5</td><td>9.5</td></tr>
+    <tr><td class="first-row">44.5</td><td></td><td>2</td><td>29</td><td>10</td></tr>
+    <tr><td class="first-row">45</td><td></td><td></td><td>29.5</td><td></td></tr>
+    <tr><td class="first-row">46</td><td></td><td>2</td><td>30</td><td>10</td></tr>
+    <tr><td class="first-row">47</td><td></td><td></td><td>31</td><td></td></tr>
+    <tr><td class="first-row">47.5</td><td></td><td></td><td>31.5</td><td></td></tr>
+    <tr><td class="first-row">48</td><td></td><td></td><td>32</td><td></td></tr>
+  </tbody>
+</table>
+
+<script>
+  const table = document.getElementById('hoverTable');
+
+  // Подсветка при наведении
+  table.addEventListener('mouseover', function(e) {
+    if (e.target.tagName === 'TD') {
+      const cell = e.target;
+      const rowIndex = cell.parentNode.rowIndex;
+      const cellIndex = cell.cellIndex;
+
+      // Удаление предыдущих подсветок
+      document.querySelectorAll('.hover-main, .hover-area, .hover-corner').forEach(el => {
+        el.classList.remove('hover-main', 'hover-area', 'hover-corner');
+      });
+
+      // Подсветка самой ячейки
+      cell.classList.add('hover-main');
+
+      // Подсветка всех ячеек сверху (по вертикали)
+      for (let i = 0; i <= rowIndex; i++) {
+        const row = table.rows[i];
+        const targetCell = row.cells[cellIndex];
+        if (targetCell && !targetCell.classList.contains('first-row')) {
+          targetCell.classList.add('hover-area');
+        }
+      }
+
+      // Подсветка всех ячеек слева (по горизонтали)
+      const row = table.rows[rowIndex].cells;
+      for (let i = 0; i <= cellIndex; i++) {
+        if (row[i]) {
+          row[i].classList.add('hover-area');
+        }
+      }
+
+      // Подсветка угла (пересечение заголовка и размера)
+      const cornerTop = table.tHead.rows[0].cells[cellIndex];
+      const cornerLeft = cell.parentNode.querySelector('.first-row');
+      if (cornerTop && cornerLeft) {
+        const cornerCell = table.rows[table.rows.length - 1].cells[table.rows[table.rows.length - 1].cells.length - 1];
+        cornerTop.classList.add('hover-corner');
+        cornerLeft.classList.add('hover-corner');
+      }
+    }
+  });
+
+  // Сброс подсветки
+  table.addEventListener('mouseout', function(e) {
+    document.querySelectorAll('.hover-main, .hover-area, .hover-corner').forEach(el => {
+      el.classList.remove('hover-main', 'hover-area', 'hover-corner');
+    });
+  });
+</script>
+
+<script src="//taplink.cc/id:13439975/widget/" async></script>
+
+</body>
+</html>
