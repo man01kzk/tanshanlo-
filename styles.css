@@ -1,0 +1,90 @@
+:root{
+  --orange: #FF6B00;
+  --purple: #6B4EFF;
+  --gray-light: #F2F2F2;
+  --gray-dark: #555555;
+  --max-width: 1200px;
+}
+
+/* Basic reset */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{font-family: 'Montserrat', sans-serif; color:var(--gray-dark); margin:0}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+
+/* Header */
+.site-header{position:fixed;left:0;right:0;top:0;background:#fff;z-index:1000;border-bottom:1px solid #eee}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.logo img{height:44px}
+.main-nav{display:flex;gap:18px}
+.main-nav a{text-decoration:none;color:var(--gray-dark);font-weight:600}
+.header-actions{display:flex;align-items:center;gap:12px}
+.burger{display:none;background:transparent;border:0;font-size:22px}
+
+/* Hero */
+.hero{height:85vh;min-height:520px;background-size:cover;background-position:center;display:flex;align-items:center}
+.hero-inner{padding:40px 20px}
+.hero-text{max-width:720px;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.35));padding:30px;border-radius:10px}
+.hero-text h1{color:white;font-size:2.2rem;margin-bottom:10px}
+.hero-text p{color:#fff;opacity:0.95;margin-bottom:18px}
+.hero-cta .btn{margin-right:10px}
+
+/* Sections */
+.section{padding:70px 0}
+.section-title{text-align:center;margin-bottom:26px;font-size:1.4rem}
+.grid{display:grid;gap:18px}
+.advantages .grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.adv-card{background:var(--gray-light);padding:22px;border-radius:10px;text-align:center;font-weight:600}
+
+.services.grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.service-card{background:#fff;padding:20px;border-radius:12px;border:1px solid #eee;text-align:left}
+.service-card img{width:48px;height:48px}
+.service-card h3{margin:10px 0}
+.service-card p{color:#666;font-size:0.95rem}
+.btn{display:inline-block;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+.btn-primary{background:linear-gradient(90deg,var(--orange),var(--purple));color:#fff;border:none}
+.btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.2);color:#fff}
+.btn-sm{padding:8px 10px}
+.btn-secondary{background:#eee;color:var(--gray-dark)}
+
+/* Reviews slider */
+.reviews-slider{display:flex;gap:20px;overflow:hidden}
+.review{background:#fff;padding:18px;border-radius:10px;border:1px solid #eee;min-width:300px}
+.review p{font-style:italic}
+
+/* Contact grid */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.contact-card{background:var(--gray-light);padding:18px;border-radius:10px}
+.contact-form{background:#fff;padding:18px;border-radius:10px;border:1px solid #eee}
+.contact-form label{display:block;margin-bottom:10px;font-size:0.9rem}
+.contact-form input,.contact-form select{width:100%;padding:10px;border-radius:6px;border:1px solid #ddd}
+.form-msg{margin-top:10px}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;padding:20px;visibility:hidden;opacity:0;transition:opacity .25s}
+.modal[aria-hidden="false"]{visibility:visible;opacity:1}
+.modal-content{background:#fff;padding:22px;border-radius:12px;max-width:420px;width:100%;position:relative}
+.modal-close{position:absolute;right:12px;top:12px;border:0;background:transparent;font-size:18px}
+.modal-actions{display:flex;gap:12px;margin-top:14px}
+
+/* Success toast */
+.success-toast{position:fixed;right:20px;bottom:20px;background:linear-gradient(90deg,var(--purple),var(--orange));color:#fff;padding:14px 18px;border-radius:10px;display:flex;gap:10px;align-items:center;transform:translateY(20px);opacity:0;transition:all .3s}
+.success-toast.show{transform:translateY(0);opacity:1}
+.checkmark{font-size:20px}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* Footer */
+.site-footer{background:var(--gray-dark);color:#fff;padding:18px;text-align:center}
+
+/* Responsive */
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr}
+  .burger{display:block}
+  .main-nav{display:none;position:absolute;right:20px;top:64px;background:#fff;padding:10px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+  .main-nav.show{display:flex;flex-direction:column}
+  .hero-text h1{font-size:1.6rem}
+  .hero{height:70vh}
+}

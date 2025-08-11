@@ -1,150 +1,211 @@
-<!DOCTYPE html>
+<!-- index.html -->
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>ТаnTanTan</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      padding: 20px;
-    }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Big Bro Эвакуатор — Алматы</title>
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      overflow: hidden;
-    }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
 
-    td, th {
-      padding: 12px 15px;
-      text-align: center;
-      border: 1px solid #ddd;
-      background-color: #fff;
-      transition: background-color 0.3s ease;
-      position: relative;
-      cursor: pointer;
-    }
-
-    tr.first-col {
-      background-color: #e0e0e0;
-      font-weight: bold;
-    }
-
-    td.first-row {
-      background-color: #e0e0e0;
-    }
-
-    /* Подсветка основной ячейки */
-    .hover-main {
-      background-color: ##000000 !important;
-      color: white;
-    }
-
-    /* Все ячейки над выбранной и слева от неё */
-    .hover-area {
-      background-color: #cccccc !important;
-      color: black;
-    }
-
-    /* Пересечение (левый верхний угол) */
-    .hover-corner {
-      background-color: #666666 !important;
-      color: white;
-    }
-  </style>
+  <!-- Google reCAPTCHA (replace SITE_KEY below) -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
-<table id="hoverTable">
-  <thead>
-    <tr class="first-col">
-      <th>Размер</th>
-      <th>Вес изделия</th>
-      <th>Высота подошвы</th>
-      <th>Длина изделия</th>
-      <th>Ширина изделия</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td class="first-row">35.5</td><td></td><td>2</td><td>22</td><td>8.5</td></tr>
-    <tr><td class="first-row">36</td><td></td><td>2</td><td>22.5</td><td>8.5</td></tr>
-    <tr><td class="first-row">37</td><td></td><td>2</td><td>23</td><td>8.5</td></tr>
-    <tr><td class="first-row">37.5</td><td></td><td>2</td><td>23.5</td><td>8.5</td></tr>
-    <tr><td class="first-row">38</td><td>310</td><td>2</td><td>24</td><td>8.5</td></tr>
-    <tr><td class="first-row">38.5</td><td></td><td>2</td><td>24.5</td><td>9</td></tr>
-    <tr><td class="first-row">39</td><td></td><td>2</td><td>25</td><td>9</td></tr>
-    <tr><td class="first-row">40</td><td></td><td>2</td><td>25.5</td><td>9</td></tr>
-    <tr><td class="first-row">40.5</td><td></td><td>2</td><td>26</td><td>9</td></tr>
-    <tr><td class="first-row">41</td><td></td><td>2</td><td>26.5</td><td>9</td></tr>
-    <tr><td class="first-row">42</td><td>330</td><td>2</td><td>27</td><td>9.5</td></tr>
-    <tr><td class="first-row">42.5</td><td></td><td>2</td><td>27.5</td><td>9.5</td></tr>
-    <tr><td class="first-row">43</td><td></td><td>2</td><td>28</td><td>9.5</td></tr>
-    <tr><td class="first-row">44</td><td></td><td>2</td><td>28.5</td><td>9.5</td></tr>
-    <tr><td class="first-row">44.5</td><td></td><td>2</td><td>29</td><td>10</td></tr>
-    <tr><td class="first-row">45</td><td></td><td>2</td><td>29.5</td><td>10</td></tr>
-    <tr><td class="first-row">46</td><td>350</td><td>2</td><td>30</td><td>10.5</td></tr>
-    <tr><td class="first-row">47</td><td></td><td>2</td><td>31</td><td>10.5</td></tr>
-    <tr><td class="first-row">47.5</td><td></td><td>2</td><td>31.5</td><td>11</td></tr>
-    <tr><td class="first-row">48</td><td></td><td>2</td><td>32</td><td>11</td></tr>
-  </tbody>
-</table>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#home"><img src="assets/logo.png" alt="Big Bro Эвакуатор" id="logoImg"></a>
 
-<script>
-  const table = document.getElementById('hoverTable');
+      <nav class="main-nav" id="mainNav">
+        <a href="#home">Главная</a>
+        <a href="#services">Услуги</a>
+        <a href="#prices">Цены</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
 
-  // Подсветка при наведении
-  table.addEventListener('mouseover', function(e) {
-    if (e.target.tagName === 'TD') {
-      const cell = e.target;
-      const rowIndex = cell.parentNode.rowIndex;
-      const cellIndex = cell.cellIndex;
+      <div class="header-actions">
+        <a class="btn btn-call" id="mainCallBtn">Вызвать эвакуатор</a>
+        <button class="burger" id="burgerBtn" aria-label="Открыть меню">☰</button>
+      </div>
+    </div>
+  </header>
 
-      // Удаление предыдущих подсветок
-      document.querySelectorAll('.hover-main, .hover-area, .hover-corner').forEach(el => {
-        el.classList.remove('hover-main', 'hover-area', 'hover-corner');
-      });
+  <!-- HERO -->
+  <section class="hero" id="home" style="background-image: url('assets/hero.jpg')">
+    <div class="hero-inner container">
+      <div class="hero-text reveal">
+        <h1>Эвакуатор в Алматы 24/7 — выезд за 15 минут</h1>
+        <p>От 5000 ₸, без скрытых доплат. Эвакуация авто, мото и спецтехники.</p>
 
-      // Подсветка самой ячейки
-      cell.classList.add('hover-main');
+        <div class="hero-cta">
+          <a class="btn btn-primary" id="heroCall">Вызвать эвакуатор</a>
+          <a class="btn btn-ghost" href="#contacts">Контакты</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      // Подсветка всех ячеек сверху (по вертикали)
-      for (let i = 0; i <= rowIndex; i++) {
-        const row = table.rows[i];
-        const targetCell = row.cells[cellIndex];
-        if (targetCell && !targetCell.classList.contains('first-row')) {
-          targetCell.classList.add('hover-area');
-        }
-      }
+  <!-- ADVANTAGES -->
+  <section class="section advantages-section">
+    <div class="container">
+      <h2 class="section-title">Почему выбирают Big Bro</h2>
+      <div class="advantages grid">
+        <div class="adv-card reveal">Выезд за 15 минут</div>
+        <div class="adv-card reveal">Работаем 24/7 без выходных</div>
+        <div class="adv-card reveal">Цены от 5 000 ₸, без скрытых доплат</div>
+        <div class="adv-card reveal">Эвакуация легковых, мото и спецтехники</div>
+      </div>
+    </div>
+  </section>
 
-      // Подсветка всех ячеек слева (по горизонтали)
-      const row = table.rows[rowIndex].cells;
-      for (let i = 0; i <= cellIndex; i++) {
-        if (row[i]) {
-          row[i].classList.add('hover-area');
-        }
-      }
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <h2 class="section-title">Наши услуги</h2>
+      <div class="services grid">
 
-      // Подсветка угла (пересечение заголовка и размера)
-      const cornerTop = table.tHead.rows[0].cells[cellIndex];
-      const cornerLeft = cell.parentNode.querySelector('.first-row');
-      if (cornerTop && cornerLeft) {
-        const cornerCell = table.rows[table.rows.length - 1].cells[table.rows[table.rows.length - 1].cells.length - 1];
-        cornerTop.classList.add('hover-corner');
-        cornerLeft.classList.add('hover-corner');
-      }
-    }
-  });
+        <article class="service-card reveal">
+          <img src="assets/icon-car.svg" alt="Легковые" />
+          <h3>Эвакуация легковых авто</h3>
+          <p>Быстро и аккуратно перевозим любые легковые автомобили по городу и области.</p>
+          <a class="btn btn-sm" href="/uslugi/legkovye">Подробнее</a>
+        </article>
 
-  // Сброс подсветки
-  table.addEventListener('mouseout', function(e) {
-    document.querySelectorAll('.hover-main, .hover-area, .hover-corner').forEach(el => {
-      el.classList.remove('hover-main', 'hover-area', 'hover-corner');
-    });
-  });
-</script>
+        <article class="service-card reveal">
+          <img src="assets/icon-bike.svg" alt="Мото" />
+          <h3>Эвакуация мотоциклов</h3>
+          <p>Профессиональная фиксация и транспортировка мото, квадро и скутеров.</p>
+          <a class="btn btn-sm" href="/uslugi/moto">Подробнее</a>
+        </article>
 
-<script src="//taplink.cc/id:13439975/widget/" async></script>
+        <article class="service-card reveal">
+          <img src="assets/icon-truck.svg" alt="Спецтехника" />
+          <h3>Перевозка спецтехники</h3>
+          <p>Тягачи и низкорамные платформы для погрузки спецтехники и грузов.</p>
+          <a class="btn btn-sm" href="/uslugi/spectehnika">Подробнее</a>
+        </article>
 
+        <article class="service-card reveal">
+          <img src="assets/icon-crash.svg" alt="ДТП" />
+          <h3>Помощь при ДТП</h3>
+          <p>Помощь на месте: буксировка, оформление, срочная эвакуация.</p>
+          <a class="btn btn-sm" href="/uslugi/dtp">Подробнее</a>
+        </article>
+
+        <article class="service-card reveal">
+          <img src="assets/icon-region.svg" alt="Регионы" />
+          <h3>Доставка авто из регионов</h3>
+          <p>Перевозка между городами по согласованному тарифу и времени.</p>
+          <a class="btn btn-sm" href="/uslugi/region">Подробнее</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section reviews-section">
+    <div class="container">
+      <h2 class="section-title">Отзывы клиентов</h2>
+
+      <div class="reviews-slider" id="reviewsSlider">
+        <blockquote class="review reveal">
+          <p>Приехали за 10 минут, помогли с буксировкой. Цена как в прайсе — честно.</p>
+          <cite>— А. Нуртазин</cite>
+        </blockquote>
+
+        <blockquote class="review reveal">
+          <p>Очень аккуратно погрузили мотоцикл, рекомендую. Оперативно и вежливо.</p>
+          <cite>— М. Чекмулдин</cite>
+        </blockquote>
+
+        <blockquote class="review reveal">
+          <p>Нужна была перевозка спецтехники — сделали быстро, без вопросов.</p>
+          <cite>— ТОО «СтройСнаб»</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FORM -->
+  <section class="section contact-section" id="contacts">
+    <div class="container">
+      <h2 class="section-title">Связаться с нами</h2>
+
+      <div class="contact-grid">
+        <div class="contact-card reveal">
+          <h3>Телефон</h3>
+          <p><a href="tel:+7XXXXXXXXXX" id="phoneLink">+7 (XXX) XXX-XX-XX</a></p>
+
+          <h3>Мессенджеры</h3>
+          <p>
+            <a class="btn btn-sm" id="waLink">WhatsApp</a>
+            <a class="btn btn-sm" id="tgLink">Telegram</a>
+          </p>
+
+          <h3>Email</h3>
+          <p><a href="mailto:info@bigbroevakuator.kz">info@bigbroevakuator.kz</a></p>
+        </div>
+
+        <form id="contactForm" class="contact-form reveal" action="/submit.php" method="POST">
+          <label>Имя
+            <input type="text" name="name" id="name" required>
+          </label>
+
+          <label>Телефон
+            <input type="tel" name="phone" id="phone" placeholder="+7XXXXXXXXXX" required>
+          </label>
+
+          <label>Тип авто
+            <select name="type" id="type">
+              <option value="legkovoe">Легковое</option>
+              <option value="moto">Мото</option>
+              <option value="spectehnika">Спецтехника</option>
+              <option value="other">Другое</option>
+            </select>
+          </label>
+
+          <!-- reCAPTCHA placeholder: replace SITE_KEY with real key -->
+          <div class="g-recaptcha" data-sitekey="REPLACE_WITH_SITE_KEY" data-size="invisible"></div>
+
+          <button type="submit" class="btn btn-primary">Отправить заявку</button>
+
+          <div id="formMsg" class="form-msg" aria-live="polite"></div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODAL for quick contact (WhatsApp / Telegram) -->
+  <div class="modal" id="quickModal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h3>Связаться с нами</h3>
+      <p>Выберите мессенджер для быстрого вызова эвакуатора</p>
+      <div class="modal-actions">
+        <a class="btn btn-primary" id="modalWA">WhatsApp</a>
+        <a class="btn btn-secondary" id="modalTG">Telegram</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS ANIMATION (hidden by default) -->
+  <div id="successToast" class="success-toast" aria-hidden="true">
+    <div class="checkmark">✔</div>
+    <p>Заявка отправлена. Мы скоро свяжемся с вами.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Big Bro Эвакуатор — Алматы</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
